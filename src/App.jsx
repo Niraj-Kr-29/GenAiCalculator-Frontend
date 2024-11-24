@@ -124,7 +124,7 @@ const App = () => {
             </div>
             <div className='sm:w-[35%] w-[100%] sm:h-[80%] h-[15%] overflow-y-scroll no-scrollbar p-2 bg-neutral-900 rounded-xl'>
                 <div className='text-neutral-100 text-2xl font-bold text-center'>Result</div>
-                <p className='text-neutral-100 text-lg font-bold'>{responseLoading ? 'Loading' : result}</p>
+                <p className='text-neutral-100 text-lg font-bold'>{responseLoading ? 'Loading please wait' : result}</p>
             </div>
           </div>
           </div>
