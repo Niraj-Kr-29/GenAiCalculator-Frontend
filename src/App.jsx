@@ -72,7 +72,7 @@ const App = () => {
         const dataURL = canvas.toDataURL('image/png');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/calculate', { image: dataURL });
+            const response = await axios.post('https://genaicalculator-backend-1.onrender.com/api/calculate', { image: dataURL });
             setResult(response.data.result);
             setResponseLoading(false);
         } catch (error) {
