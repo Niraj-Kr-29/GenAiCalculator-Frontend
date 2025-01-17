@@ -28,7 +28,6 @@ const App = () => {
     }, []);
 
     const startDrawing = (e) => {
-        e.preventDefault();
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         
@@ -43,8 +42,6 @@ const App = () => {
     };
     
     const draw = (e) => {
-        e.preventDefault()
-    
         if (!isDrawing) return;
     
         const canvas = canvasRef.current;
@@ -68,22 +65,6 @@ const App = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         setResult('')
     };
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-
-        // Attach non-passive event listeners
-        canvas.addEventListener('touchstart', startDrawing, { passive: false });
-        canvas.addEventListener('touchmove', draw, { passive: false });
-        canvas.addEventListener('touchend', stopDrawing, { passive: false });
-
-        // Cleanup
-        return () => {
-            canvas.removeEventListener('touchstart', startDrawing);
-            canvas.removeEventListener('touchmove', draw);
-            canvas.removeEventListener('touchend', stopDrawing);
-        };
-    }, []);
 
     const solveCanvas = async () => {
         setResponseLoading(true);
@@ -129,8 +110,8 @@ const App = () => {
                 Reset
             </button>
           </div>
-          <div className='w-screen h-screen p-4 lg:flex justify-evenly'>
-            <div className='lg:w-[60%] w-[100%] lg:h-[80%] h-[60%]'>
+          <div className='w-screen h-screen p-4 sm:flex justify-evenly'>
+            <div className='sm:w-[60%] w-[100%] h-[80%]'>
                 <canvas
                     className='w-full bg-black rounded-xl h-[100%]'
                     ref={canvasRef}
@@ -139,13 +120,9 @@ const App = () => {
                     onMouseMove={draw}
                     onMouseUp={stopDrawing}
                     onMouseOut={stopDrawing}
-                    onPointerDown={startDrawing}
-                    onPointerMove={draw}
-                    onPointerLeave={stopDrawing}
-                    
                 ></canvas>
             </div>
-            <div className='lg:w-[35%] w-[100%] lg:h-[80%] h-[15%] overflow-y-scroll no-scrollbar p-2 bg-neutral-900 rounded-xl'>
+            <div className='sm:w-[35%] w-[100%] sm:h-[80%] h-[15%] overflow-y-scroll no-scrollbar p-2 bg-neutral-900 rounded-xl'>
                 <div className='text-neutral-100 text-2xl font-bold text-center'>Result</div>
                 <p className='text-neutral-100 text-lg font-bold'>{responseLoading ? 'Loading please wait' : result}</p>
             </div>
